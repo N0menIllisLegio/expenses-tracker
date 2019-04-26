@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route } from 'react-router-dom';
+import LogIn from './components/LogIn';
+import SignUp from './components/SignUp';
+import Bills from './components/Bills';
+import Dashboard from './components/Dashboard';
+import Products from './components/Products';
+import Users from './components/Users'
+// import io from 'socket.io-client';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+          <Route path='/login' component={ LogIn }/>
+          <Route path='/signup' component={ SignUp }/>
+          <Route path='/dashboard' component={ Dashboard }/>
+          <Route path='/bills' component={ Bills }/>
+          <Route path='/products' component={ Products }/>
+          <Route path='/users' component={ Users }/>
+      </div>
+    </BrowserRouter>
   );
 }
 
 export default App;
+
+//  
+// <Route exact path='/' render={(props) => <Notes {...props} socket={ this.state.socket } />}/>
