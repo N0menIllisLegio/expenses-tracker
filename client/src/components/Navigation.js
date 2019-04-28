@@ -1,91 +1,63 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Bell, Home, File, ShoppingCart, Users } from 'react-feather';
+import { Home, File, ShoppingCart, LogOut } from 'react-feather';
 import logo from '../icons/icon1.svg';
-
-import { OverlayTrigger, Popover } from "react-bootstrap";
-
 
 function Navigation(WrappedComponent) {
   return class extends React.Component {
     render(){
       return (
         <div>
-          <nav className="navbar navbar-expand-sm navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow justify-content-between">
-            <div className="col-sm-3 col-md-2 mr-0 navbar-brand d-flex align-items-center">
-              <img src={logo} alt="logo" width='32' height='32' className="ml-3"/>
-              <span className="ml-4">Username</span>
+          <nav className="navbar navbar-expand-xl navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow justify-content-between">
+            <div className="col-md-2 mr-0 navbar-brand d-flex align-items-center">
+              <Link to="/">
+                <img src={logo} alt="logo" width='32' height='32' className="ml-0"/>
+              </Link>
+              <span className="ml-4">Expenses Tracker</span>
             </div>
-            <ul className="navbar-nav px-3 d-flex align-items-center">
-              <li className="nav-item">
-                <Link className="nav-link" to="#">
-                  <OverlayTrigger
-                    trigger="click"
-                    placement={'bottom'}
-                    overlay={
-                      <Popover id={`popover-positioned-bottom`}>
-                        <strong>Holy guacamole!</strong> Check this info.
-                      </Popover>
-                    }>
-                    <Bell/>
-                  </OverlayTrigger>
+            
+            <ul className="navbar-nav d-flex flex-row px-3 justify-content-between align-items-center">
+              <li className="nav-item px-3">
+                <Link className="nav-link" to="/">
+                <div className="d-flex flex-column align-items-center">
+                  <Home size={20}/>
+                  <span>Dashboard</span>
+                </div>
                 </Link>
               </li>
-
-              <li className="nav-item text-nowrap">
-                <Link className="nav-link" to="/login">Sign out</Link>
+              <li className="nav-item px-3">
+                <Link className="nav-link" to="/bills">
+                <div className="d-flex flex-column align-items-center">
+                  <File size={20}/>
+                  <span>Bills</span>
+                </div>
+                </Link>
+              </li>
+              <li className="nav-item px-3">
+                <Link className="nav-link" to="/products">
+                  <div className="d-flex flex-column align-items-center">
+                    <ShoppingCart size={20}/>
+                    <span>Products</span>
+                  </div>
+                </Link>
+              </li>
+              <li className="nav-item text-nowrap px-3">
+                <Link className="nav-link text-danger" to="/login" onClick={() => localStorage.removeItem('authToken')}>
+                  <div className="d-flex flex-column align-items-center">
+                    <LogOut size={20}/>
+                    <span>Sign out</span>
+                  </div>
+                </Link>
               </li>
             </ul>
           </nav>
 
-          <div className="container-fluid">
-            <div className="row">
 
-              <nav className="col-md-2 d-none d-md-block bg-light sidebar mt-2">
-                <div className="sidebar-sticky">
-                  <ul className="nav flex-column">
-                    <li className="nav-item">
-                      <Link className="nav-link active" to="/dashboard">
-                      <div className="d-flex align-items-center">
-                        <Home size={15}/>
-                        <span className="ml-2">Dashboard</span>
-                      </div>
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link active" to="/bills">
-                      <div className="d-flex align-items-center">
-                        <File size={15}/>
-                        <span className="ml-2">Bills</span>
-                      </div>
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link active" to="/products">
-                        <div className="d-flex align-items-center">
-                          <ShoppingCart size={15}/>
-                          <span className="ml-2">Products</span>
-                        </div>
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link active" to="/users">
-                        <div className="d-flex align-items-center">
-                          <Users size={15}/>
-                          <span className="ml-2">Users</span>
-                        </div>
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </nav>
-
-              <main className="col-md-9 ml-sm-auto col-lg-10 px-4 pt-5 mt-2">
-                <WrappedComponent />
-              </main>
-
+          <main className="px-5 my-5 pt-5 pt-md-3 pt-lg-3 pt-xl-3 row">
+            <div className="pt-4 pt-md-0 pt-lg-0 pt-xl-0 col">
+              <WrappedComponent {...this.props}/>
             </div>
-          </div>
+          </main>
         </div>
       )
     }

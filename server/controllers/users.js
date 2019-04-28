@@ -9,7 +9,7 @@ module.exports = {
       email: req.body.email,
       password: req.body.password}, (err, result) => {
       if (err) {
-        res.status(500).send({status: 'error', msg: 'Failed to create user. Maybe email is taken already?'}) //
+        res.status(500).send({status: 'error', msg: 'Failed to create user'}) //
       } else {
         res.status(200).send({status: 'success', msg: 'User created successfully'})
       }
@@ -24,11 +24,15 @@ module.exports = {
         if (err) {
           res.status(500).send({status: 'error', msg: err.message})
         } else {
-          if (bcrypt.compareSync(req.body.password, userInfo.password)) {
-            const token = jwt.sign({id: userInfo._id}, req.app.get('secretKey'), {expiresIn: '1h'})
-            res.status(200).send({status: 'success', msg: 'User logged in', token: token})
+          if (userInfo) {
+            if (bcrypt.compareSync(req.body.password, userInfo.password)) {
+              const token = jwt.sign({id: userInfo._id}, req.app.get('secretKey'), {expiresIn: '1h'})
+              res.status(200).send({status: 'success', msg: 'User logged in', token: token})
+            } else {
+              res.status(403).send({status: 'error', msg: 'Invalid password'})
+            }
           } else {
-            res.status(403).send({status: 'error', msg: 'Invalid email/password'})
+            res.status(403).send({status: 'error', msg: 'Invalid email'})
           }
         }
       })

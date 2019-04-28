@@ -2,52 +2,100 @@ const billModel = require('../database/models/bills')
 const userModel = require('../database/models/users')
 
 module.exports = {
-  getBills: function (userId) {
-    return userModel.findById(userId).populate({
-      path: 'cards',
-      options: {
-        sort: {
-          'createdAt': -1
-        }
-      }
-    }).exec()
+  getBills: function (req, res) {
+    return userModel.findById(req.body.userId).populate({
+      path: 'bills'
+    }).exec((err, user) => {
+      if (err)
+        res.status(500).send(err)
+      else 
+        res.status(200).send(user.bills)
+    })
   },
-  
-  createBill: function (bill) {
-    if (bill && bill.name) {
-      return billModel.create({
+
+  getBill: function (req, res) {
+    return billModel.findOne({ _id: req.query.billId}, (err, bill) => {
+      if (err)
+        res.status(500).send(err)
+      else 
+        res.status(200).send(bill)
+    })
+  },
+
+  getProducts: function(req, res) {
+    return userModel.findById(req.body.userId).populate({
+      path: 'bills'
+    }).exec((err, user) => {
+      if (err)
+        res.status(500).send(err)
+      else {
+        const bills = user.bills;
+        let products = [];
+        bills.forEach(bill => products = products.concat(Array.from(bill.products)));
+        res.status(200).send(products);
+      }
+    })
+  },
+
+  createBill: function (req, res) {
+    let bill = req.body
+    if (bill) {
+      billModel.create({
         name: bill.name,
         description: bill.description,
+        products: bill.products,
         date: bill.date
       }).then((newBill) => {
-        return userModel.findById(bill.userId).exec().then((user) => {
+        userModel.findById(bill.userId, (err, user) => {
           user.bills.push(newBill)
-          return user.save()
+          user.save().then(() => {
+            if (err)
+              res.status(500).send(err)
+            else
+              res.sendStatus(200)
+          })
         })
       })
     } else {
-      return Promise.reject()
+      res.status(400).send([])
     }
   },
 
-  updateBill: function (id, updBill) {
-    if (id && updBill) {
-      return billModel.findByIdAndUpdate(id, updBill).exec()
+  updateBill: function (req, res) {
+    if (req.body.id) {
+      billModel.findByIdAndUpdate(req.body.id, {
+        name: req.body.name,
+        description: req.body.description,
+        products: req.body.products,
+        date: req.body.date,
+      }, (err, oldBill) => {
+        if (err) {
+          res.status(500).send(err)
+        } else {
+          res.sendStatus(200)
+        }
+      })
     } else {
-      return Promise.reject()
+      res.status(404).send([])
     }
   },
 
-  removeBill: function (id, userId) {
-    if (id && userId) {
-      return userModel.findById(userId).exec().then((user) => {
-        user.bills.pull(id)
-        user.save().then(() => {
-          return billModel.findByIdAndDelete(id)
+  removeBill: function (req, res) {
+    if (req.body.id && req.body.userId) {
+      userModel.findById(req.body.userId, (err, user) => {
+        user.bills.pull(req.body.id)
+        user.save().then((user) => {
+          billModel.findByIdAndDelete(req.body.id, (err, deleted) => {
+            if (err) {
+              res.status(500).send(err)
+            } else {
+              res.sendStatus(200)
+            }
+          })
         })
       })
     } else {
-      return Promise.reject()
+      res.status(404).send([])
     }
   }
 }
