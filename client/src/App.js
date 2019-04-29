@@ -9,27 +9,25 @@ import EditBill from './components/EditBill';
 
 import { toast } from 'react-toastify';
 
+const serverIP = '192.168.100.4:5000';
+
 class App extends React.Component {
   componentDidMount() {
     toast.configure();
-
-    // localStorage.removeItem('authToken');
-    // console.error(err);
-    // window.location.replace("http://localhost:3000/login");
   }
 
   render() {
     return (
       <BrowserRouter>
         <div className="App">  
-          <Route path='/login' component={ LogIn } />
-          <Route path='/signup' component={ SignUp }/>
+          <Route path='/login' render={(props) => <LogIn {...props} serverIP={ serverIP } />}/>
+          <Route path='/signup' render={(props) => <SignUp {...props} serverIP={ serverIP } />}/>
 
-          <Route exact path='/' component={ Dashboard }/>
-          <Route path='/bills' component={ Bills }/>
-          <Route path='/products' component={ Products }/>
-          <Route path='/editbill/:id' component={ EditBill }/>
-          <Route path='/addbill/:id' component={ EditBill }/>
+          <Route exact path='/' render={(props) => <Dashboard {...props} serverIP={ serverIP } />}/>
+          <Route path='/bills' render={(props) => <Bills {...props} serverIP={ serverIP } />}/>
+          <Route path='/products' render={(props) => <Products {...props} serverIP={ serverIP } />}/>
+          <Route path='/editbill/:id' render={(props) => <EditBill {...props} serverIP={ serverIP } />}/>
+          <Route path='/addbill/:id' render={(props) => <EditBill {...props} serverIP={ serverIP } />}/>
         </div>
       </BrowserRouter>
     )

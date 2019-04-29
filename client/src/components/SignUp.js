@@ -57,7 +57,7 @@ class SignUp extends React.Component {
         passDontMatch: true
       })
     } else {
-      Axios.post('http://localhost:5000/users/signup', { username: username, email: email, password: password })
+      Axios.post(`http://${this.props.serverIP}/users/signup`, { username: username, email: email, password: password })
       .then(response => { 
         toast(<span>You are signed up!<br/>Redirecting back to LogIn...</span>, { 
           type: 'success', hideProgressBar: true, 

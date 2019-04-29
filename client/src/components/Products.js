@@ -31,7 +31,7 @@ class Products extends React.Component {
   }
 
   componentDidMount() {
-    Axios.get('http://localhost:5000/api/products', { headers: { 'authorization-token': localStorage.getItem('authToken') }})
+    Axios.get(`http://${this.props.serverIP}/api/products`, { headers: { 'authorization-token': localStorage.getItem('authToken') }})
       .then(response => {
           this.setState({
             products: response.data

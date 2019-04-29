@@ -29,6 +29,7 @@ server.listen(PORT, function() {
 });
 
 function validateUser(req, res, next) {
+  
   jwt.verify(req.headers['authorization-token'], server.get('secretKey'), (err, decoded) => {
     if (err) {
       res.status(401).send({status: 'error', msg: 'Unauthorized user'})

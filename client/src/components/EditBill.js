@@ -30,7 +30,7 @@ class EditBill extends React.Component {
         pageTitle: 'Edit Bill'
       });
 
-      Axios.get(`http://localhost:5000/api/bill/?billId=${id}`, { 
+      Axios.get(`http://${this.props.serverIP}/api/bill/?billId=${id}`, { 
           headers: { 'authorization-token': localStorage.getItem('authToken') }
         }).then(response => {
           this.setState({
@@ -103,7 +103,7 @@ class EditBill extends React.Component {
   }
 
   handleDeleteBill = () => {
-    Axios.delete('http://localhost:5000/api/bill', { 
+    Axios.delete(`http://${this.props.serverIP}/api/bill`, { 
       data: { id: this.state._id }, 
       headers: { 'authorization-token': localStorage.getItem('authToken') }
     }).then(response => {
@@ -123,7 +123,7 @@ class EditBill extends React.Component {
     if (this.state.products.length > 0) {
       if (this.state.edit) {
         //UPD
-        Axios.patch('http://localhost:5000/api/bill', { 
+        Axios.patch(`http://${this.props.serverIP}/api/bill`, { 
           id: this.state._id,
           name: this.state.title, 
           description: this.state.description, 
@@ -142,7 +142,7 @@ class EditBill extends React.Component {
           })
       } else {
         //NEW
-        Axios.post('http://localhost:5000/api/bill', { 
+        Axios.post(`http://${this.props.serverIP}/api/bill`, { 
           name: this.state.title, 
           description: this.state.description, 
           date: this.state.selectedDay, 

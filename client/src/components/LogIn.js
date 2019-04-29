@@ -33,7 +33,7 @@ class LogIn extends React.Component {
     const email = this.state.email;
     const password = this.state.password;
 
-    Axios.post('http://localhost:5000/users/login', { email: email, password: password })
+    Axios.post(`http://${this.props.serverIP}/users/login`, { email: email, password: password })
       .then(response => { 
         localStorage.setItem('authToken', response.data.token);
         this.props.history.push('/'); 

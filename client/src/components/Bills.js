@@ -28,7 +28,7 @@ class Bills extends React.Component {
   }
 
   componentDidMount() {
-    Axios.get('http://localhost:5000/api/bills', { headers: { 'authorization-token': localStorage.getItem('authToken') }})
+    Axios.get(`http://${this.props.serverIP}/api/bills`, { headers: { 'authorization-token': localStorage.getItem('authToken') }})
       .then(response => {
           let bills = response.data.map(bill => {
             return {

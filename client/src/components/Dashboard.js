@@ -13,7 +13,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    Axios.get('http://localhost:5000/api/bills', { headers: { 'authorization-token': localStorage.getItem('authToken') }})
+    Axios.get(`http://${this.props.serverIP}/api/bills`, { headers: { 'authorization-token': localStorage.getItem('authToken') }})
       .then(response => {
           let bills = response.data.map(bill => {
             return {
@@ -30,6 +30,7 @@ class Dashboard extends React.Component {
           })
         })
       .catch(error => {
+        console.log(error)
         if (error.response.status === 401) {
           this.props.history.push('/login');
         } else {
