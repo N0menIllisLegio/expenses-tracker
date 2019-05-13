@@ -24,3 +24,7 @@ node server.js
 ```bash
 npm start
 ```
+5. In *client/src/App.js* set your server IP address and port
+```javascript
+const serverIP = 'IP:PORT';
+```
