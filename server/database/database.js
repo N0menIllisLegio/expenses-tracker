@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const mongoDB = 'mongodb+srv://gadfly:12345QWert@cluster-etamj.mongodb.net/ProjectDB'
+const mongoDB = 'mongodb+srv://NAME:PASSWORD@cluster-etamj.mongodb.net/ProjectDB'
 
 mongoose.connect(mongoDB, { useNewUrlParser: true })
 mongoose.set('useFindAndModify', false);
