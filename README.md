@@ -16,15 +16,19 @@
 ```bash
 npm install
 ```
-3. Run in *server* folder
+3. In *server/database/database.js* set your Mongo DB name and password
+```javascript
+const mongoDB = 'mongodb+srv://NAME:PASSWORD@cluster-etamj.mongodb.net/ProjectDB'
+```
+4. Run in *server* folder
 ```bash
 node server.js
 ```
-4. In *client/src/App.js* set your server IP address and port
+5. In *client/src/App.js* set your server IP address and port
 ```javascript
 const serverIP = 'IP:PORT';
 ```
-5. Run in *client* folder
+6. Run in *client* folder
 ```bash
 npm start
 ```
