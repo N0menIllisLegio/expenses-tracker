@@ -20,11 +20,12 @@ npm install
 ```bash
 node server.js
 ```
-4. Run in *client* folder
-```bash
-npm start
-```
-5. In *client/src/App.js* set your server IP address and port
+4. In *client/src/App.js* set your server IP address and port
 ```javascript
 const serverIP = 'IP:PORT';
 ```
+5. Run in *client* folder
+```bash
+npm start
+```
+
