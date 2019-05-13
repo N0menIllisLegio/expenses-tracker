@@ -9,7 +9,7 @@ import EditBill from './components/EditBill';
 
 import { toast } from 'react-toastify';
 
-const serverIP = '192.168.100.4:5000';
+const serverIP = 'IP:PORT';
 
 class App extends React.Component {
   componentDidMount() {
