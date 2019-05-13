@@ -11,16 +11,16 @@
 
 ### Running
 
-1. Open Client and Server folders in Terminal
+1. Open *client* and *server* folders in **Terminal**
 2. Run in each folder:
 ```bash
 npm install
 ```
-3. Run in Server folder
+3. Run in *server* folder
 ```bash
 node server.js
 ```
-4. Run in Client folder
+4. Run in *client* folder
 ```bash
 npm start
 ```
