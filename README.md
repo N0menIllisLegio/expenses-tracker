@@ -22,9 +22,9 @@
 
 ![Alt text](../images/EditBill_1.png?raw=true)
 
-![Alt text](../images/AddProduct.png.png?raw=true)
+![Alt text](../images/AddProduct.png?raw=true)
 
-![Alt text](../images/Products.png.png?raw=true)
+![Alt text](../images/Products.png?raw=true)
 
 ## Running
 
