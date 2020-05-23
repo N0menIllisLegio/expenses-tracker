@@ -26,7 +26,7 @@
 
 ![Alt text](../images/Products.png?raw=true)
 
-## Running
+## Building
 
 1. Open *client* and *server* folders in **Terminal**
 2. Run in each folder:
