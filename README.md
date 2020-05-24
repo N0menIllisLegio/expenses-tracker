@@ -9,7 +9,24 @@
 - [ ] Add products categorization.
 - [ ] Add config files.
 
-### Running
+## Screenshots
+![Alt text](../images/SignIn.png?raw=true)
+
+![Alt text](../images/SignUp.png?raw=true)
+
+![Alt text](../images/Dashboard_1.png?raw=true)
+
+![Alt text](../images/Dashboard_2.png?raw=true)
+
+![Alt text](../images/Bills_1.png?raw=true)
+
+![Alt text](../images/EditBill_1.png?raw=true)
+
+![Alt text](../images/AddProduct.png?raw=true)
+
+![Alt text](../images/Products.png?raw=true)
+
+## Building
 
 1. Open *client* and *server* folders in **Terminal**
 2. Run in each folder:
